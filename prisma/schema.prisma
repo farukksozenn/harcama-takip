@@ -19,6 +19,8 @@ model Expense {
   amount   Float
   date     DateTime  @default(now())
   category String    @default("Genel")
+  userId   Int
+  user     User      @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -26,4 +28,5 @@ model User {
   email         String    @unique
   passwordHash  String
   created       DateTime  @default(now())
+  expenses      Expense[]
 }
