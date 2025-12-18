@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
+import Header from "./components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,34 +22,30 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="tr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="dashboard-layout">
-          
-          <header className="dashboard-header">
-            <h1 className="app-title">💸 Harcama Takip</h1>
-            <div className="user-area">
-            </div>
-          </header>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          <div className="dashboard-layout">
+            {/* ✅ SADECE BU HEADER */}
+            <Header />
 
-          <aside className="dashboard-sidebar">
-            <nav>
-              <ul>
-                <li>
-                  <Link href="/">🏠 Ana Sayfa</Link>
-                </li>
-              </ul>
-            </nav>
-          </aside>
+            <aside className="dashboard-sidebar">
+              <nav>
+                <ul>
+                  <li>
+                    <Link href="/">🏠 Ana Sayfa</Link>
+                  </li>
+                </ul>
+              </nav>
+            </aside>
 
-          <main className="dashboard-content">{children}</main>
-        </div>
+            <main className="dashboard-content">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

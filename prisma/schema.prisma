@@ -20,3 +20,10 @@ model Expense {
   date     DateTime  @default(now())
   category String    @default("Genel")
 }
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  passwordHash  String
+  created       DateTime  @default(now())
+}
